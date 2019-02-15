@@ -1,0 +1,50 @@
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>jQuery Ajax 实例演示</title>
+</head>
+<script src="jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$(document).ready(function() { //这个就是jQueryready,它就像C语言的main 所有操作包含在它里面
+		$("#button_login").mousedown(function() {
+			login(); //点击ID为"button_login"的按钮后触发函数 login();
+		});
+		function login() { //函数 login();
+		
+		var username = $("#username").val(); //取框中的用户名
+		var password = $("#password").val(); //取框中的密码
+	
+				var param = {"username":username,"password":password}; 
+					$.post("http://localhost:8081/lab/user/login.do",param,function(result){
+						if(result){
+							$('#result').html("姓名:" + username + "<br/>密码:" + password); 
+						}else{
+							alert("用户名或者密码错误!");
+						}
+					});
+
+
+	};
+});
+		
+	
+
+
+
+</script>
+
+<body>
+	<div id="result" style="background: orange; border: 1px solid red; width: 300px; height: 200px;"></div>
+	<form id="formtest" action="" method="post">
+		<p>
+			<span>输入姓名:</span><input type="text" name="username" id="username" />
+		</p>
+		<p>
+			<span>输入密码:</span><input type="text" name="password" id="password" />
+		</p>
+	</form>
+	<button id="button_login">ajax提交</button> 
+</body>
+
+</html>
